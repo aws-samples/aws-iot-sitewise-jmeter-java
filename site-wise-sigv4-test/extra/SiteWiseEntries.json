@@ -1,0 +1,18 @@
+{
+    "entries": [
+        {
+            "entryId": "9b55c656-0617-4476-bc43-ac91b12e060e",
+            "propertyAlias": "/MyTestFactory/MyTestAsset/MyTestTemperatureProperty0001",
+            "propertyValues": [
+                {
+                    "value": {
+                        "integerValue": 6430
+                    },
+                    "timestamp": {
+                        "timeInSeconds": 1695908502
+                    }
+                }
+            ]
+        }
+    ]
+}
