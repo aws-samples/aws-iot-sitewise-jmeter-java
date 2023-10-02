@@ -7,6 +7,13 @@ The first one is a Java program that uses standard libraires to build the Sigv4 
 
 The second one is a similar program, also written in Java but integrated in the form of a script with JMeter – a commonly used tool to emulate Web traffic.
 
+## Prerequisites
+
+- Access to an AWS account
+- Access to AWS IoT SiteWise
+- Java™ SE Development Kit 20.0.2 or later installed
+- Apache Maven 3.9.4 or later installed
+- Apache JMeter 5.6.2 or later installed
 
 ### Step 1 - AWS Credentials
 
@@ -61,35 +68,29 @@ jmeter  site-wise-sigv4-test-jmeter/testplan/SiteWiseEntries.jmx
 
 ```
 
-
-
 ![jmeter1](site-wise-sigv4-test-jmeter/docs/jmeter1.png)
-<sub><sup>Figure 1. Test plan configured to emulate 10 devices, 1 message every 60 seconds for each one.</sup></sub>
-
+Figure 1. Test plan configured to emulate 10 devices, 1 message every 60 seconds for each one.
 
 ![jmeter2](site-wise-sigv4-test-jmeter/docs/jmeter2.png)
-<sub><sup>Figure 2. A sequential deviceId is generate for each device. This is used to build the PropertyAlias for the SiteWise entry.</sup></sub>
+Figure 2. A sequential deviceId is generate for each device. This is used to build the PropertyAlias for the SiteWise entry.
 
 ![jmeter3](site-wise-sigv4-test-jmeter/docs/jmeter3.png)
-<sub><sup>Figure 3. Template used for the test. Note the 4 placeholders: `entityId` , `deviceId`, `SensorTemperature` and `localTime`</sup></sub>
+Figure 3. Template used for the test. Note the 4 placeholders: `entityId` , `deviceId`, `SensorTemperature` and `localTime`
 
 ![jmeter4](site-wise-sigv4-test-jmeter/docs/jmeter4.png)
-<sub><sup>Figure 4. Beanshell script used to create `entryId` and `localTime` values</sup></sub>
+Figure 4. Beanshell script used to create `entryId` and `localTime` values
 
 ![jmeter5](site-wise-sigv4-test-jmeter/docs/jmeter5.png)
-<sub><sup>Figure 5. JMeter config element to generate a random value for `SensorTemperatrue`</sup></sub>
+Figure 5. JMeter config element to generate a random value for `SensorTemperatrue`
 
 ![jmeter6](site-wise-sigv4-test-jmeter/docs/jmeter6.png)
-<sub><sup>Figure 6. Beanshell script that analyses the payload, takes AWS temporary credentials and produces `Authorization` `x-amz-date`. It also passes `AWS_SESSION_TOKEN` as `x-amz-security-token`</sup></sub>
+Figure 6. Beanshell script that analyses the payload, takes AWS temporary credentials and produces `Authorization` `x-amz-date`. It also passes `AWS_SESSION_TOKEN` as `x-amz-security-token`
 
 ![jmeter7](site-wise-sigv4-test-jmeter/docs/jmeter7.png)
-<sub><sup>Figure 7. The header manager takes variables and sets them as HTTP headers</sup></sub>
-
+Figure 7. The header manager takes variables and sets them as HTTP headers
 
 ![jmeter8](site-wise-sigv4-test-jmeter/docs/jmeter8.png)
-<sub><sup>Figure 8. After running the test. You can see the results under "View Results Tree"</sup></sub>
+Figure 8. After running the test. You can see the results under "View Results Tree"
 
 ![jmeter9](site-wise-sigv4-test-jmeter/docs/jmeter9.png)
-<sub><sup>Figure 9. You can take a look at the "Response Data" to ensure you are getting the expected result from AWS IoT SiteWise</sup></sub>
-
-Thats it! 
+Figure 9. You can take a look at the "Response Data" to ensure you are getting the expected result from AWS IoT SiteWise

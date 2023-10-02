@@ -162,17 +162,17 @@ public class App {
         String serviceName = "iotsitewise";
 
         // Get method from sampler
-        // TESTING String method = sampler.getMethod();
+        // TESTING Used for JMeter script -> String method = sampler.getMethod();
         String method = "POST"; // TESTING
         System.out.println("Method: " + method);
 
         // Get body from sampler
-        // TESTING String body = method.equalsIgnoreCase("POST") ? sampler.getArguments().getArgument(0).getValue() : "";
+        // TESTING Used for JMeter script ->  String body = method.equalsIgnoreCase("POST") ? sampler.getArguments().getArgument(0).getValue() : "";
         String body = readJSONFile(args[0]);
         System.out.println("body:\n" + body);
             
         // Retrieve URL from HTTP Request
-        // TESTING URL url = sampler.getUrl();
+        // TESTING Used for JMeter script ->  URL url = sampler.getUrl();
         URL url = new URL("https://data.iotsitewise."+ AWS_REGION +".amazonaws.com/properties"); // TESTING
 
         // Get host from URL
@@ -212,11 +212,15 @@ public class App {
         System.out.println("-H \"x-amz-security-token: " + AWS_SESSION_TOKEN+ "\"");
 
         try {
-            String result = sendSigV4Post("https://data.iotsitewise."+ AWS_REGION +".amazonaws.com/properties",
-                                    amazonDate, amazonAuth, AWS_SESSION_TOKEN, body );
+
+            String result = sendSigV4Post("https://data.iotsitewise."+ AWS_REGION +".amazonaws.com/properties", amazonDate, amazonAuth, AWS_SESSION_TOKEN, body );
+            
             System.out.println("sendSigV4Post result: " + result);
+        
         } catch (IOException e) {
+        
             e.printStackTrace();
+        
         }
 
     }
